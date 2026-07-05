@@ -1,0 +1,115 @@
+/* ===== GLOBAL ===== */
+body{
+    margin:0;
+    background:black;
+    overflow:hidden;
+    font-family:Arial, sans-serif;
+}
+
+/* ===== NEON BACKGROUND ===== */
+body::before{
+    content:"";
+    position:fixed;
+    width:800px;
+    height:800px;
+    background:conic-gradient(#ff00ff,#00ffff,#ffcc00,#ff00ff);
+    filter:blur(120px);
+    opacity:0.35;
+    animation:spin 6s linear infinite;
+    z-index:-1;
+}
+
+@keyframes spin{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
+}
+
+/* ===== CARD ===== */
+.card{
+    width:360px;
+    border-radius:25px;
+    overflow:hidden;
+    position:relative;
+    margin:auto;
+    top:50%;
+    transform:translateY(-50%);
+    box-shadow:0 0 25px #ff00ff,0 0 60px #00ffff;
+    animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(-50%) translateY(0);}
+    50%{transform:translateY(-50%) translateY(-10px);}
+}
+
+/* IMAGE */
+.card img{
+    width:100%;
+    display:block;
+    filter:contrast(1.2) brightness(1.1);
+    transition:0.3s;
+}
+
+.card img:hover{
+    transform:scale(1.08);
+}
+
+/* OVERLAY */
+.overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top,rgba(0,0,0,0.85),transparent 60%);
+}
+
+/* GLITCH TEXT */
+.caption{
+    position:absolute;
+    bottom:20px;
+    width:100%;
+    text-align:center;
+    font-size:42px;
+    font-weight:bold;
+    color:white;
+    text-shadow:
+    2px 2px #ff00ff,
+    -2px -2px #00ffff;
+    animation:glitch 1s infinite;
+}
+
+@keyframes glitch{
+    0%{transform:translate(0);}
+    20%{transform:translate(-2px,2px);}
+    40%{transform:translate(2px,-2px);}
+    60%{transform:translate(-1px,1px);}
+    80%{transform:translate(1px,-1px);}
+    100%{transform:translate(0);}
+}
+
+/* BUTTON */
+button{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    padding:12px 25px;
+    border:none;
+    border-radius:50px;
+    font-size:18px;
+    color:white;
+    background:linear-gradient(45deg,#ff00ff,#00ffff);
+    box-shadow:0 0 20px cyan;
+    cursor:pointer;
+}
+
+button:hover{
+    transform:translateX(-50%) scale(1.1);
+}
+
+/* FLASH EFFECT */
+.flash{
+    position:fixed;
+    inset:0;
+    background:white;
+    opacity:0;
+    pointer-events:none;
+}
