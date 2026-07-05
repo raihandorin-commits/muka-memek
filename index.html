@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meme Keren</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:radial-gradient(circle,#1a0033,#000);
+    overflow:hidden;
+    font-family:Arial, sans-serif;
+}
+
+/* efek background glow */
+body::before{
+    content:"";
+    position:absolute;
+    width:600px;
+    height:600px;
+    background:radial-gradient(circle,#ff00ff55,transparent 70%);
+    animation:spin 8s linear infinite;
+}
+
+@keyframes spin{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
+}
+
+/* card */
+.card{
+    width:350px;
+    background:#111;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 0 30px #ff00ff,0 0 60px #00ffff;
+    transform:scale(0.9);
+    animation:float 3s ease-in-out infinite;
+    position:relative;
+    z-index:2;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+}
+
+img{
+    width:100%;
+    display:block;
+    transition:0.4s;
+}
+
+.card:hover img{
+    transform:scale(1.1);
+    filter:brightness(1.2);
+}
+
+/* caption */
+.caption{
+    padding:20px;
+    text-align:center;
+    font-size:40px;
+    font-weight:bold;
+    color:white;
+    text-shadow:0 0 10px #ff00ff,0 0 20px #00ffff;
+}
+
+/* tombol */
+button{
+    position:fixed;
+    bottom:20px;
+    padding:12px 25px;
+    font-size:18px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(45deg,#ff00ff,#00ffff);
+    color:white;
+    cursor:pointer;
+    box-shadow:0 0 20px #00ffff;
+}
+button:hover{
+    transform:scale(1.1);
+}
+</style>
+</head>
+
+<body>
+
+<!-- AUDIO -->
+<audio id="bgm" loop>
+    <source src="lagu.mp3" type="audio/mpeg">
+</audio>
+
+<!-- MEME -->
+<div class="card">
+    <img id="foto" src="foto.jpg" alt="foto">
+    <div class="caption" id="caption">MUKA LU KAYA MEMEK PAY</div>
+</div>
+
+<!-- BUTTON START -->
+<button onclick="start()">PLAY</button>
+
+<script>
+// ganti caption (opsional)
+const text = "MUKA LU KAYA MEMEK PAY😎";
+let i = 0;
+let cap = document.getElementById("caption");
+cap.innerHTML = "";
+
+function typeText(){
+    if(i < text.length){
+        cap.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeText, 70);
+    }
+}
+typeText();
+
+// play musik + efek
+function start(){
+    const audio = document.getElementById("bgm");
+    audio.play();
+
+    // efek shake
+    document.querySelector(".card").animate([
+        {transform:"rotate(0deg)"},
+        {transform:"rotate(-5deg)"},
+        {transform:"rotate(5deg)"},
+        {transform:"rotate(0deg)"}
+    ],{
+        duration:400
+    });
+
+    document.querySelector("button").style.display = "none";
+}
+</script>
+
+</body>
+</html>
